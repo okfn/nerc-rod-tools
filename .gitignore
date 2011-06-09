@@ -1,0 +1,6 @@
+*.db
+*.sql
+*.sql.bz2
+*.mdb
+export/
+pyenv/
