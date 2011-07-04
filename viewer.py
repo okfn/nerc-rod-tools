@@ -58,6 +58,7 @@ def list_grant():
 def show_grant(grant_id):
     res = grant_summary(grant_id)
     return render_template('grant_summary.html',
+                           ref=grant_id,
                            years=res.keys(),
                            outputs=res)
 
