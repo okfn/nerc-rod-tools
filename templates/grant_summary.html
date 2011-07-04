@@ -1,6 +1,143 @@
 {% extends "layout.html" %}
 {% block main %}
-<code>
-  <pre>{{ dump }}</pre>
-</code>
+  {% for year in  years %}
+
+
+    <h3>{{ year }}</h3>
+
+
+    {# #################################################################### #}
+
+
+    {% for o in outputs[year]['achievements'] -%}
+      <div class='output achievement' title='{{ o | pprint }}'>
+        <h4>{{ o.TITLE }}</h4>
+        <p>{{ o.DESCRIPTION }}</p>
+      </div>
+    {%- endfor %}{# achievements #}
+
+
+    {# #################################################################### #}
+
+
+    {% for o in outputs[year]['communications'] -%}
+      <div class='output communication'>
+        <h4>{{ o.NAME }}</h4>
+        {% if o.DESCRIPTION != '' %}
+          <p>{{ o.DESCRIPTION }}</p>
+        {% endif %}
+        <dl>
+        {% if o.VENUE != '' %}
+          <dt>Venue:</dt><dd>{{ o.VENUE }}</dd>
+        {% endif %}
+        {% if o.AUDIENCE != '' %}
+          <dt>Audience: </dt><dd>{{ o.AUDIENCE }}</dd>
+        {% endif %}
+        </dl>
+      </div>
+    {%- endfor %}{# communications #}
+
+
+    {# #################################################################### #}
+
+
+    {% for o in outputs[year]['publications'] -%}
+
+      {% if o.MEDIA == 'pub_journal' -%}
+        <div class='output publication' title='{{ o | pprint }}'>
+          <h4 class='citation'>
+            <span class='author'>{{ o.JOURNAL_AUTHOR }}</span>.
+            <span class='title'>{{ o.JOURNAL_TITLE }}</span>.
+            <span class='journal'>{{ o.JOURNAL_NAME }}</span>
+            <span class='issue'>({{ o.JOURNAL_ISSUE | default('unknown issue', true) }})</span>,
+            <span class='pages'>{{ o.JOURNAL_PAGES }}</span>.
+          </p>
+        </div>
+      {% else %}
+        <div class='output publication' title='{{ o | pprint }}'>
+          Pub type: {{ o.MEDIA }}
+        </div>
+      {%- endif %}
+
+    {%- endfor %}{# publications #}
+
+
+    {# #################################################################### #}
+
+    {# DEBUG macro #}
+    {% macro bool_helper(obj, key, human, jnr) -%}
+      {% if obj[key] in ['y', 'Y'] -%}
+        {{ jnr() }}{{ human|safe }}
+      {%- endif %}
+    {%- endmacro %}
+
+    {% for o in outputs[year]['policy'] -%}
+      <div class='output policy' title='{{ o | pprint }}'>
+        {% if o.GOVMNT_ADVICE in ['y', 'Y'] -%}
+          {% set j = joiner(", ") %}
+          <h4>Advice given to government:</h4>
+          <dl>
+          {% if o.GOVMNT_ADVICE_DETAILS != '' %}
+            <dt>Details:</dt><dd>{{ o.GOVMNT_ADVICE_DETAILS }}</dd>
+          {% endif %}
+          {% if o.GOVMNT_ADVICE_TYPE != '' %}
+            <dt>Type:</dt><dd>{{ o.GOVMNT_ADVICE_TYPE }}</dd>
+          {% endif %}
+            <dt>Recipients:</dt>
+            <dd>
+              {{ bool_helper(o, 'GOVMNT_DEFRA',            '', j) }}
+              {{ bool_helper(o, 'GOVMNT_DID',              '', j) }}
+              {{ bool_helper(o, 'GOVMNT_DTI',              '', j) }}
+              {{ bool_helper(o, 'GOVMNT_EA',               '', j) }}
+              {{ bool_helper(o, 'GOVMNT_EU',               '', j) }}
+              {{ bool_helper(o, 'GOVMNT_NIA',              '', j) }}
+              {{ bool_helper(o, 'GOVMNT_ODPM',             '', j) }}
+              {{ bool_helper(o, 'GOVMNT_OTHER',            '', j) }}
+              {{ bool_helper(o, 'GOVMNT_RDA_LOCAL_GOVMNT', '', j) }}
+              {{ bool_helper(o, 'GOVMNT_SE',               '', j) }}
+            </dd>
+          </dl>
+        {% else %}
+          {% set j = joiner(", ") %}
+          <h4>Policy impact in:</h4>
+          <p>
+            {{- bool_helper(o, 'AREA_BIODIVERSITY',       'Biodiversity',       j) -}}
+            {{- bool_helper(o, 'AREA_CHANGE',             'Climate change(?)',  j) -}}
+            {{- bool_helper(o, 'AREA_CONSERVATION',       'Conservation',       j) -}}
+            {{- bool_helper(o, 'AREA_ENERGY',             'Energy',             j) -}}
+            {{- bool_helper(o, 'AREA_EU_REQS',            'EU Requirements',    j) -}}
+            {{- bool_helper(o, 'AREA_FOOD',               'Food',               j) -}}
+            {{- bool_helper(o, 'AREA_LAND',               'Land',               j) -}}
+            {{- bool_helper(o, 'AREA_MUSEUMS',            'Museums',            j) -}}
+            {{- bool_helper(o, 'AREA_NATURAL',            'Natural',            j) -}}
+            {{- bool_helper(o, 'AREA_PLANNING',           'Planning',           j) -}}
+            {{- bool_helper(o, 'AREA_POLLUTION',          'Pollution',          j) -}}
+            {{- bool_helper(o, 'AREA_RESOURCES',          'Resources',          j) -}}
+            {{- bool_helper(o, 'AREA_TECHNOLOGY',         'Technology',         j) -}}
+            {{- bool_helper(o, 'AREA_TOURISM',            'Tourism',            j) -}}
+            {{- bool_helper(o, 'AREA_TRANSPORT',          'Transport',          j) -}}
+            {{- bool_helper(o, 'AREA_WASTE',              'Waste',              j) -}}
+            {{- bool_helper(o, 'AREA_WATER',              'Water',              j) -}}
+            {{- bool_helper(o, 'ENVIRONMENT_POLICY',      'Environment policy', j) -}}
+            {{- bool_helper(o, 'POLICY_DEFRA',            '<abbr title="Department for Environment, Food and Rural Affairs">DEFRA</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_DID',              '<abbr title="Department for International Development">DFID</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_DTI',              '<abbr title="Department for Trade and Industry">DTI</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_EA',               '<abbr title="Environment Agency">EA</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_EU',               '<abbr title="European Union">EU</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_NIA',              '<abbr title="Nuclear Industry Association">NIA (?)</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_ODPM',             '<abbr title="Office of the Deputy Prime Minister">ODPM</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_OTHER',            '"Other" policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_RDA_LOCAL_GOVMNT', '<abbr title="Regional Development Agency">RDA</abbr> and/or local government policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_SE',               '<abbr title="Scottish Enterprise">SE</abbr> policy areas (?)', j) -}}
+            {{- bool_helper(o, 'POLICY_WAG',              '<abbr title="Welsh Assembly Government">WAG</abbr> policy areas', j) -}}
+          </p>
+        {%- endif %}
+      </div>
+    {%- endfor %}
+
+    <code class='detail'>
+      <pre>{{ outputs[year] | pprint }}</pre>
+    </code>
+
+  {% endfor %}{# for year in years #}
 {% endblock %}

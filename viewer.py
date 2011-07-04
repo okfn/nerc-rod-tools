@@ -39,7 +39,6 @@ def grant_summary(grant_id):
 @app.before_request
 def before_request():
     g.db = connect_db()
-    # g.db.text_factory = str # Be more forgiving of non-UTF8 text fields.
 
 @app.after_request
 def after_request(response):
@@ -57,8 +56,10 @@ def list_grant():
 
 @app.route('/grant/<path:grant_id>')
 def show_grant(grant_id):
-    dump = json.dumps(grant_summary(grant_id), sort_keys=True, indent=2)
-    return render_template('grant_summary.html', dump=dump)
+    res = grant_summary(grant_id)
+    return render_template('grant_summary.html',
+                           years=res.keys(),
+                           outputs=res)
 
 if __name__ == "__main__":
     app.run()

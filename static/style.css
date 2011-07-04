@@ -1,0 +1,25 @@
+.output {
+	padding-left: 45px;
+	min-height: 40px;
+	background: transparent url(img/question.png) no-repeat left top;
+}
+
+.achievement { background-image: url(img/lab.png); }
+.communication { background-image: url(img/bullhorn.png); }
+.publication { background-image: url(img/paper.png); }
+.fellow { background-image: url(img/man.png); }
+
+h4.citation {
+	font-weight: normal;
+}
+.citation .journal, .citation .issue {
+	font-style: italic;
+}
+.citation .author {
+	font-weight: bold;
+}
+
+.detail {
+	font-size: 10px;
+	color: #555;
+}
