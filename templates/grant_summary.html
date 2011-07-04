@@ -101,7 +101,6 @@
 
     {# #################################################################### #}
 
-    {# DEBUG macro #}
     {% macro bool_helper(obj, key, human, jnr) -%}
       {% if obj[key] in ['y', 'Y'] -%}
         {{ jnr() }}{{ human|safe }}
