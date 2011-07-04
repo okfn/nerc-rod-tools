@@ -7,6 +7,7 @@
 .achievement { background-image: url(img/lab.png); }
 .communication { background-image: url(img/bullhorn.png); }
 .publication { background-image: url(img/paper.png); }
+.book { background-image: url(img/book.png); }
 .fellow { background-image: url(img/man.png); }
 
 h4.citation {

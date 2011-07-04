@@ -44,7 +44,6 @@
 
 
     {% for o in outputs[year]['publications'] -%}
-
       {% if o.MEDIA == 'pub_journal' -%}
         <div class='output publication' title='{{ o | pprint }}'>
           <h4 class='citation'>
@@ -53,14 +52,50 @@
             <span class='journal'>{{ o.JOURNAL_NAME }}</span>
             <span class='issue'>({{ o.JOURNAL_ISSUE | default('unknown issue', true) }})</span>,
             <span class='pages'>{{ o.JOURNAL_PAGES }}</span>.
-          </p>
+          </h4>
+        </div>
+      {% elif o.MEDIA in ['pub_book', 'pub_chapter'] %}
+        <div class='output publication book' title='{{ o | pprint }}'>
+          <h4 class='citation'>
+            <span class='author'>{{ o.BOOK_AUTHOR }}</span>.
+            <span class='title'>{{ o.BOOK_TITLE }}</span>.
+          </h4>
+          <dl>
+            {% if o.BOOK_SERIES != '' %}
+              <dt>Series:</dt><dd>{{ o.BOOK_SERIES }}</dd>
+            {% endif %}
+            {% if o.BOOK_SERIES_NO != '' %}
+              <dt>Series number:</dt><dd>{{ o.BOOK_SERIES_NO }}</dd>
+            {% endif %}
+
+            {% if o.MEDIA == 'pub_chapter' %}
+              <dt>Chapter number:</dt><dd>{{ o.CHAPTER_NO }}</dd>
+              <dt>Chapter title:</dt><dd>{{ o.CHAPTER_TITLE }}</dd>
+            {% endif %}
+
+            {% if o.BOOK_ISBN_HBK != '' %}
+              <dt>Hardback ISBN:</dt><dd>{{ o.BOOK_ISBN_HBK }}</dd>
+            {% endif %}
+            {% if o.BOOK_ISBN_PBK != '' %}
+              <dt>Paperback ISBN:</dt><dd>{{ o.BOOK_ISBN_PBK }}</dd>
+            {% endif %}
+            {% if o.BOOK_PUBLISHER != '' %}
+              <dt>Publisher:</dt><dd>{{ o.BOOK_PUBLISHER }}</dd>
+            {% endif %}
+          </dl>
+        </div>
+      {% elif o.MEDIA == 'pub_other' %}
+        <div class='output publication' title='{{ o | pprint }}'>
+          <h4 class='citation'>
+            <span class='author'>{{ o.OTHER_AUTHOR }}</span>.
+            <span class='title'>{{ o.OTHER_TITLE }}</span>.
+            <span class='type'>({{ o.OTHER_TYPE }})</span>
+          </h4>
         </div>
       {% else %}
-        <div class='output publication' title='{{ o | pprint }}'>
-          Pub type: {{ o.MEDIA }}
-        </div>
+        New publication type (needs template coding): {{ o.MEDIA }}
       {%- endif %}
-
+      </div>
     {%- endfor %}{# publications #}
 
 
