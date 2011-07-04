@@ -33,3 +33,5 @@ You can optionally convert these CSVs to SQL "INSERT" statement files using `csv
     $ echo $ROD_TABLES | while read table; do python csv2sql.py $table < $table.csv | bzip2 > $table.sql.bz2; done
 
 Note that you will need to ensure you load the tables into the SQL database in the correct order to ensure FOREIGN KEY constraints are met. In particular, load ROD_GRANTS first, and ROD_OUTPUTS second.
+
+NB: The foreign key constraints *won't* be met by the data at the moment. The apparent absence of the concept of such constraints from Access means this is a rather messy dataset.
