@@ -28,7 +28,7 @@
         {% if o.DESCRIPTION != '' %}
           <p>{{ o.DESCRIPTION }}</p>
         {% endif %}
-        <dl>
+        <dl class='parallel'>
         {% if o.VENUE != '' %}
           <dt>Venue:</dt><dd>{{ o.VENUE }}</dd>
         {% endif %}
@@ -60,7 +60,7 @@
             <span class='author'>{{ o.BOOK_AUTHOR }}</span>.
             <span class='title'>{{ o.BOOK_TITLE }}</span>.
           </h4>
-          <dl>
+          <dl class='parallel'>
             {% if o.BOOK_SERIES != '' %}
               <dt>Series:</dt><dd>{{ o.BOOK_SERIES }}</dd>
             {% endif %}
@@ -112,7 +112,7 @@
         {% if o.GOVMNT_ADVICE in ['y', 'Y'] -%}
           {% set j = joiner(", ") %}
           <h4>Advice given to government:</h4>
-          <dl>
+          <dl class='parallel'>
           {% if o.GOVMNT_ADVICE_DETAILS != '' %}
             <dt>Details:</dt><dd>{{ o.GOVMNT_ADVICE_DETAILS }}</dd>
           {% endif %}
