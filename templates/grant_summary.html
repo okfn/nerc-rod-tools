@@ -121,16 +121,16 @@
           {% endif %}
             <dt>Recipients:</dt>
             <dd>
-              {{ bool_helper(o, 'GOVMNT_DEFRA',            '', j) }}
-              {{ bool_helper(o, 'GOVMNT_DID',              '', j) }}
-              {{ bool_helper(o, 'GOVMNT_DTI',              '', j) }}
-              {{ bool_helper(o, 'GOVMNT_EA',               '', j) }}
-              {{ bool_helper(o, 'GOVMNT_EU',               '', j) }}
-              {{ bool_helper(o, 'GOVMNT_NIA',              '', j) }}
-              {{ bool_helper(o, 'GOVMNT_ODPM',             '', j) }}
-              {{ bool_helper(o, 'GOVMNT_OTHER',            '', j) }}
-              {{ bool_helper(o, 'GOVMNT_RDA_LOCAL_GOVMNT', '', j) }}
-              {{ bool_helper(o, 'GOVMNT_SE',               '', j) }}
+              {{ bool_helper(o, 'GOVMNT_DEFRA',            '<abbr title="Department for Environment, Food and Rural Affairs">DEFRA</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_DID',              '<abbr title="Department for International Development">DFID</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_DTI',              '<abbr title="Department for Trade and Industry">DTI</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_EA',               '<abbr title="Environment Agency">EA</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_EU',               '<abbr title="European Union">EU</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_NIA',              '<abbr title="Nuclear Industry Association">NIA</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_ODPM',             '<abbr title="Office of the Deputy Prime Minister">ODPM</abbr>', j) }}
+              {{ bool_helper(o, 'GOVMNT_OTHER',            '"Other"', j) }}
+              {{ bool_helper(o, 'GOVMNT_RDA_LOCAL_GOVMNT', '<abbr title="Regional Development Agency">RDA</abbr> and/or local government', j) }}
+              {{ bool_helper(o, 'GOVMNT_SE',               '<abbr title="Scottish Enterprise">SE</abbr>', j) }}
             </dd>
           </dl>
         {% else %}
@@ -160,7 +160,7 @@
             {{- bool_helper(o, 'POLICY_DTI',              '<abbr title="Department for Trade and Industry">DTI</abbr> policy areas', j) -}}
             {{- bool_helper(o, 'POLICY_EA',               '<abbr title="Environment Agency">EA</abbr> policy areas', j) -}}
             {{- bool_helper(o, 'POLICY_EU',               '<abbr title="European Union">EU</abbr> policy areas', j) -}}
-            {{- bool_helper(o, 'POLICY_NIA',              '<abbr title="Nuclear Industry Association">NIA (?)</abbr> policy areas', j) -}}
+            {{- bool_helper(o, 'POLICY_NIA',              '<abbr title="Nuclear Industry Association">NIA</abbr> policy areas', j) -}}
             {{- bool_helper(o, 'POLICY_ODPM',             '<abbr title="Office of the Deputy Prime Minister">ODPM</abbr> policy areas', j) -}}
             {{- bool_helper(o, 'POLICY_OTHER',            '"Other" policy areas', j) -}}
             {{- bool_helper(o, 'POLICY_RDA_LOCAL_GOVMNT', '<abbr title="Regional Development Agency">RDA</abbr> and/or local government policy areas', j) -}}
