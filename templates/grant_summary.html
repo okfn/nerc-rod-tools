@@ -23,7 +23,7 @@
 
 
     {% for o in outputs[year]['communications'] -%}
-      <div class='output communication'>
+      <div class='output communication' title='{{ o | pprint }}'>
         <h4>{{ o.NAME }}</h4>
         {% if o.DESCRIPTION != '' %}
           <p>{{ o.DESCRIPTION }}</p>
