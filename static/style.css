@@ -9,6 +9,7 @@
 .publication { background-image: url(img/paper.png); }
 .book { background-image: url(img/book.png); }
 .fellow { background-image: url(img/man.png); }
+.prize { background-image: url(img/trophy.png); }
 
 h4.citation {
   font-weight: normal;

@@ -44,6 +44,30 @@
     {# #################################################################### #}
 
 
+    {% for o in outputs[year]['prizes'] -%}
+      <div class='output prize' title='{{ o | pprint }}'>
+        <h4>{{ o.NAME }}</h4>
+        {% if o.DESCRIPTION != '' %}
+          <p>{{ o.DESCRIPTION }}</p>
+        {% endif %}
+        <dl class='parallel'>
+        {% if o.P_DATE != '' %}
+          <dt>Prize date: </dt><dd>{{ o.P_DATE }}</dd>
+        {% endif %}
+        {% if o.PRIZE_WINNER != '' %}
+          <dt>Prize winner: </dt><dd>{{ o.PRIZE_WINNER }}</dd>
+        {% endif %}
+        {% if o.SPONSOR != '' %}
+          <dt>Sponsor:</dt><dd>{{ o.SPONSOR }}</dd>
+        {% endif %}
+        </dl>
+      </div>
+    {%- endfor %}{# prizes #}
+
+
+    {# #################################################################### #}
+
+
     {% for o in outputs[year]['publications'] -%}
       {% if o.MEDIA == 'pub_journal' -%}
         <div class='output publication' title='{{ o | pprint }}'>
