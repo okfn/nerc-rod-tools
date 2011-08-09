@@ -3,7 +3,7 @@
 {% block main %}
   <h2>Outputs from grant {{ ref }}</h2>
 
-  {% for year in  years %}
+  {% for year in years %}
 
 
     <h3>{{ year }}</h3>
@@ -199,6 +199,7 @@
     <code class='detail'>
       <pre>{{ outputs[year] | pprint }}</pre>
     </code>
-
+  {% else %}
+    <p>No outputs found for this grant, sorry!</p>
   {% endfor %}{# for year in years #}
 {% endblock %}
